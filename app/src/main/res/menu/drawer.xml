@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/total_item"
+        android:icon="@drawable/menu_item"
+        android:title="전체 글 보기"/>
+
+    <item
+        android:id="@+id/univ_item"
+        android:icon="@drawable/menu_item"
+        android:title="제주대학교"/>
+
+    <item
+        android:id="@+id/major_item"
+        android:icon="@drawable/menu_item"
+        android:title="공과대학"/>
+
+    <item
+        android:id="@+id/sub_item"
+        android:icon="@drawable/menu_item"
+        android:title="컴퓨터공학전공"/>
+
+</menu>
