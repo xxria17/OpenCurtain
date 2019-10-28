@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
+            android:layout_margin="8dp"
             android:text="제주대학교"
             card_view:layout_constraintEnd_toEndOf="parent" />
 
@@ -34,21 +35,22 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
+                android:tint="#707070"
                 card_view:layout_constraintStart_toStartOf="parent"
                 card_view:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
+                tools:srcCompat="@drawable/circle" />
 
             <TextView
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="299dp"
                 android:layout_marginRight="299dp"
+                android:textStyle="bold"
                 android:text="익명"
                 card_view:layout_constraintEnd_toEndOf="parent"
+                card_view:layout_constraintHorizontal_bias="0.25"
                 card_view:layout_constraintStart_toEndOf="@+id/imageView2"
                 card_view:layout_constraintTop_toTopOf="parent" />
 
@@ -62,6 +64,7 @@
                 android:layout_marginRight="299dp"
                 android:layout_marginBottom="8dp"
                 android:text="19.9.16 19:38"
+                android:textSize="11dp"
                 card_view:layout_constraintBottom_toBottomOf="parent"
                 card_view:layout_constraintEnd_toEndOf="parent"
                 card_view:layout_constraintHorizontal_bias="0.0"
@@ -73,47 +76,40 @@
             android:id="@+id/post_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="내용" />
-
-        <TextView
-            android:id="@+id/more"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="right"
-            android:layout_marginRight="5dp"
-            android:text="더보기" />
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="금융권 준비하시는 분 계신가요? 이번에 졸업해서 준비를 하려는데 여러모로 걱정이 많네요 ㅠㅠ ncs 준비는 어떻게 하시는지, 그 외 다른 부분은 어떤거 준…"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="22dp"/>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_margin="5dp"
+            android:background="#D7D7D7">
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="99dp"
-                android:layout_height="105dp"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                tools:srcCompat="@drawable/square" />
 
-            <ImageView
-                android:id="@+id/imageView5"
-                android:layout_width="115dp"
-                android:layout_height="105dp"
-                tools:srcCompat="@tools:sample/avatars" />
 
-            <ImageView
-                android:id="@+id/imageView6"
-                android:layout_width="102dp"
-                android:layout_height="match_parent"
-                tools:srcCompat="@tools:sample/avatars" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp">
 
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
+                android:tint="#B18D8D"
                 card_view:srcCompat="@drawable/circle" />
 
             <TextView
@@ -126,8 +122,8 @@
                 android:id="@+id/like_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="21"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:text="21" />
         </TableRow>
 
     </LinearLayout>

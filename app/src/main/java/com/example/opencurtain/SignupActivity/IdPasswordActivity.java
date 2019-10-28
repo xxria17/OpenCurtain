@@ -13,6 +13,7 @@ public class IdPasswordActivity extends AppCompatActivity implements View.OnClic
 
     private Button next_btn;
     private EditText univ_email, id, password;
+    private String getId, getPassword, getEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,13 @@ public class IdPasswordActivity extends AppCompatActivity implements View.OnClic
             startActivity(next);
             finish();
         }
+    }
+
+    private void signUp(){
+        getId = id.getText().toString();
+        getPassword = password.getText().toString();
+
+
     }
 
     private void init(){

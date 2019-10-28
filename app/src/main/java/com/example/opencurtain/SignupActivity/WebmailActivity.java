@@ -15,6 +15,7 @@ public class WebmailActivity extends AppCompatActivity implements View.OnClickLi
     private long pressedTime = 0;
     private Button next_btn;
     private EditText email;
+    private String getEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,14 +26,33 @@ public class WebmailActivity extends AppCompatActivity implements View.OnClickLi
         email = (EditText) findViewById(R.id.edit_univ_webmail);
 
         next_btn.setOnClickListener(this);
+
     }
+
 
     @Override
     public void onClick(View view){
-        if(view == next_btn){
-        Intent next = new Intent(this,AuthActivity.class);
-        startActivity(next);
-        finish();}
+        if(view == next_btn) {
+            getEmail = email.getText().toString();
+
+            if (getEmail.isEmpty()) {
+                Toast.makeText(WebmailActivity.this, "이메일을 적어주세요!", Toast.LENGTH_SHORT).show();
+                return;
+            } else {
+
+                // 인증 이메일 전송
+                Intent sendEmail = new Intent(Intent.ACTION_SEND);
+                sendEmail.setType("plain/text");
+                sendEmail.putExtra(Intent.EXTRA_EMAIL, getEmail);
+                sendEmail.putExtra(Intent.EXTRA_SUBJECT, "[Open Curtain] 본인 인증 확인 메일"); //보내질 이메일 제목
+                sendEmail.putExtra(Intent.EXTRA_TEXT, ""); //보내질 이메일 내용
+                startActivity(sendEmail);
+
+                Intent next = new Intent(this, AuthActivity.class);
+                startActivity(next);
+                finish();
+            }
+        }
     }
 
 
