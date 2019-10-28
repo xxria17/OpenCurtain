@@ -1,4 +1,4 @@
-package Network;
+package com.example.opencurtain.Network;
 import android.content.ContentValues;
 import java.io.BufferedReader;
 import java.io.IOException;

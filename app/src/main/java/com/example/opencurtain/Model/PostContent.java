@@ -3,6 +3,13 @@ package com.example.opencurtain.Model;
 public class PostContent {
     private int ID;
 
+//    int id = 0;
+//    String user = "";
+//    int board = 0;
+//    String timestamp = "";
+//    String title = "";
+//    String content = "";
+
     private String subscribe;
     private String board;
     private String university;

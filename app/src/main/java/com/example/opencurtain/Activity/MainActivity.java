@@ -1,37 +1,50 @@
 package com.example.opencurtain.Activity;
 
-import android.content.ContentValues;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toolbar;
 
+import com.example.opencurtain.Fragment.FacultyPostFragment;
+import com.example.opencurtain.Fragment.MajorPostFragment;
+import com.example.opencurtain.Fragment.MyPageFragment;
+import com.example.opencurtain.Fragment.SearchFragment;
+import com.example.opencurtain.Fragment.SettingFragment;
 import com.example.opencurtain.Fragment.TotalPostFragment;
+import com.example.opencurtain.Fragment.UniversityPostFragment;
 import com.example.opencurtain.R;
+
 
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import Network.Request;
-import Network.RequestHandler;
-import Network.RequestHttpURLConnection;
-
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     private TotalPostFragment totalPostFragment = new TotalPostFragment();
+    private FacultyPostFragment facultyPostFragment = new FacultyPostFragment();
+    private MajorPostFragment majorPostFragment = new MajorPostFragment();
+    private UniversityPostFragment universityPostFragment = new UniversityPostFragment();
+
+    private SettingFragment settingFragment = new SettingFragment();
+    private MyPageFragment myPageFragment = new MyPageFragment();
+    private SearchFragment searchFragment = new SearchFragment();
+
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
+    ImageView imageView;
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -43,67 +56,95 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //바텀 네비게이션 메뉴
+        imageView = findViewById(R.id.drawerMenuButton);
+        drawerLayout = findViewById(R.id.drawer_menu);
+        navigationView = findViewById(R.id.navigationView);
+
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                menuItem.setChecked(true);
+                FragmentTransaction transaction = fragmentManager.beginTransaction();
+                drawerLayout.closeDrawers();
+
+                int id = menuItem.getItemId();
+                switch (id) {
+                    case R.id.total_item:
+                        transaction.replace(R.id.frameLayout, totalPostFragment).commit();
+                        break;
+
+                    case R.id.univ_item:
+                        transaction.replace(R.id.frameLayout, universityPostFragment).commit();
+                        break;
+
+                    case R.id.major_item:
+                        transaction.replace(R.id.frameLayout, facultyPostFragment).commit();
+                        break;
+
+                    case R.id.sub_item:
+                        transaction.replace(R.id.frameLayout, majorPostFragment).commit();
+                        break;
+                }
+                return true;
+            }
+        });
+//        //바텀 네비게이션 메뉴
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigation);
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         transaction.replace(R.id.frameLayout, totalPostFragment).commitAllowingStateLoss();
 
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onNavigationItemReselected(@NonNull MenuItem menuItem) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
-                switch (menuItem.getItemId()){
-                    case R.id.home:{
-                        transaction.replace(R.id.frame_layout, totalPostFragment).commit();
+                switch (menuItem.getItemId()) {
+                    case R.id.home: {
+                        transaction.replace(R.id.frameLayout, totalPostFragment).commitAllowingStateLoss();
                         break;
                     }
-//                    case R.id.search:{
-//                        transaction.replace(R.id.frame_layout, diaryFragment).commit();
-//                        break;
-//                    }
-//                    case R.id.mypage:{
-//                        transaction.replace(R.id.frame_layout, feelingFragment).commit();
-//                        break;
-//                    }
-//                    case R.id.setting:{
-//                        transaction.replace(R.id.frame_layout, settingFragment).commit();
-//                        break;
-//                    }
-
+                    case R.id.search: {
+                        transaction.replace(R.id.frameLayout, searchFragment).commitAllowingStateLoss();
+                        break;
+                    }
+                    case R.id.mypage: {
+                        transaction.replace(R.id.frameLayout, myPageFragment).commitAllowingStateLoss();
+                        break;
+                    }
+                    case R.id.setting: {
+                        transaction.replace(R.id.frameLayout, settingFragment).commitAllowingStateLoss();
+                        break;
+                    }
                 }
-//                return true;
+
+                return true;
             }
         });
 
-        try{
-            Request request = new Request(new URL("http","http://opencurtain.run.goorm.io",200,""),"GET");
-            request.execute(new RequestHandler() {
-                @Override
-                public void onRequestOK(JSONObject jsonObject) {
-                    Log.i("APIRequest", jsonObject.toString());
-                }
-
-                @Override
-                public void onRequestErr(int code) {
-                    Log.e("APIRequest","error occur "+ code);
-                }
-            });
-        } catch (MalformedURLException e){
-            e.printStackTrace();
-        }
+//        try{
+//            APIRequest request = new APIRequest(new URL("http","http://opencurtain.run.goorm.io",200,""),"GET");
+//            request.execute(new RequestHandler() {
+//                @Override
+//                public void onRequestOK(JSONObject jsonObject) {
+//                    Log.i("APIRequest", jsonObject.toString());
+//                }
+//
+//                @Override
+//                public void onRequestErr(int code) {
+//                    Log.e("APIRequest","error occur "+ code);
+//                }
+//            });
+//        } catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }
+//
 
     }
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        switch (item.getItemId()) {
-            case R.id.univ_item:
-                transaction.replace(R.id.frame_layout, totalPostFragment).commit();
-                break;
-        }
-        return true;
-    }
-
 }
 

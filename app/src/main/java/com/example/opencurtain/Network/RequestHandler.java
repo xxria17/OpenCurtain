@@ -1,4 +1,4 @@
-package Network;
+package com.example.opencurtain.Network;
 
 import org.json.JSONObject;
 

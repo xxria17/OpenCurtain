@@ -1,4 +1,4 @@
-package Network;
+package com.example.opencurtain.Network;
 
 import android.os.AsyncTask;
 
@@ -10,17 +10,26 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 
-public class Request {
+public class APIRequest {
     private URL url;
     private String method;
     private String token;
 
-    public Request(URL url, String method){
-        this.url = url;
-        this.method = method;
+//    private String uri = "http://opencurtain.run.goorm.io/";
+
+//    public APIRequest(URL url, String method){
+//        this.url = url;
+//        this.method = method;
+//        this.token = null;
+//    }
+
+    public APIRequest(API api, Method method) throws MalformedURLException {
+        this.url = new URL(api.getEndPoint());
+        this.method = method.getMethod();
         this.token = null;
     }
 
@@ -30,9 +39,8 @@ public class Request {
     class AsyncRequestCall extends AsyncTask<JSONObject, Void, JSONObject>{
         private RequestHandler handler;
         private int code = -1;
-
-        protected AsyncRequestCall(RequestHandler handler){
-            this.handler = handler;
+        protected AsyncRequestCall(RequestHandler handle){
+            handler = handle;
         }
 
         @Override
@@ -78,8 +86,10 @@ public class Request {
             return result;
         }
 
+
+
         @Override
-    protected void onPostExecute(JSONObject jsonObject){
+        protected void onPostExecute(JSONObject jsonObject){
             super.onPostExecute(jsonObject);
             if(jsonObject != null){
                 handler.onRequestOK(jsonObject);
@@ -88,6 +98,7 @@ public class Request {
             }
         }
     }
+
 
     public void execute(RequestHandler handler){
         execute(handler, null);

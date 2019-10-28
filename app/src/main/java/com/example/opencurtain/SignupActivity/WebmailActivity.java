@@ -39,15 +39,7 @@ public class WebmailActivity extends AppCompatActivity implements View.OnClickLi
                 Toast.makeText(WebmailActivity.this, "이메일을 적어주세요!", Toast.LENGTH_SHORT).show();
                 return;
             } else {
-
-                // 인증 이메일 전송
-                Intent sendEmail = new Intent(Intent.ACTION_SEND);
-                sendEmail.setType("plain/text");
-                sendEmail.putExtra(Intent.EXTRA_EMAIL, getEmail);
-                sendEmail.putExtra(Intent.EXTRA_SUBJECT, "[Open Curtain] 본인 인증 확인 메일"); //보내질 이메일 제목
-                sendEmail.putExtra(Intent.EXTRA_TEXT, ""); //보내질 이메일 내용
-                startActivity(sendEmail);
-
+                postUserEmail();
                 Intent next = new Intent(this, AuthActivity.class);
                 startActivity(next);
                 finish();
@@ -66,5 +58,10 @@ public class WebmailActivity extends AppCompatActivity implements View.OnClickLi
             Toast.makeText(this,"'뒤로' 버튼을 한번 더 누르시면 종료됩니다.",Toast.LENGTH_SHORT).show();
             this.finish();
         }
+    }
+
+    private void postUserEmail(){
+        getEmail = email.getText().toString();
+
     }
 }

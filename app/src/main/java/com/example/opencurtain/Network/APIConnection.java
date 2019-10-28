@@ -1,4 +1,4 @@
-package Network;
+package com.example.opencurtain.Network;
 
 import android.util.Log;
 
@@ -9,7 +9,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class Connection {
+public class APIConnection {
 
     public static String connect(URL url) throws MalformedURLException, IOException{
         HttpURLConnection conn = (HttpURLConnection) url.openConnection();
