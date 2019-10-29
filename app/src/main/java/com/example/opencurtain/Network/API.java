@@ -14,7 +14,7 @@ public enum API {
     login("/user/login/");
 
     private final String endPoint;
-    private static final String HOST = "http://opencurtain-test.run.goorm.io";
+    private static final String HOST = "http://opencurtain.run.goorm.io";
     API(String endPoint) {
         this.endPoint = endPoint;
     }

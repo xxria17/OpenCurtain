@@ -9,4 +9,5 @@ public class UserContent {
     int faculty = 0;
     int department = 0;
     int authcode = 0;
+
 }

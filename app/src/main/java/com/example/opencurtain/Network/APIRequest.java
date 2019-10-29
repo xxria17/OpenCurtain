@@ -58,7 +58,7 @@ public class APIRequest {
 
                 if(objects != null && objects[0] != null){
                     connection.setDoOutput(true);
-                    connection.setRequestProperty("Content=Type","application/json");
+                    connection.setRequestProperty("Content-Type","application/json");
                     OutputStream outputStream = connection.getOutputStream();
                     outputStream.write(objects[0].toString().getBytes(Charset.forName("UTF-8")));
                     outputStream.flush();
@@ -69,13 +69,16 @@ public class APIRequest {
 
                 code = connection.getResponseCode();
                 if(code == HttpURLConnection.HTTP_OK){
+                    result = new JSONObject();
+                    result.put("HTTP_CODE", code);
                     String line = null;
                     BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream(), Charset.forName("UTF-8")));
                     StringBuilder builder = new StringBuilder();
                     while((line = reader.readLine()) != null) {
                         builder.append(line);
                     }
-                    result = new JSONObject(builder.toString());
+                    JSONObject obj = new JSONObject(builder.toString());
+                    result.put("BODY_JSON", obj);
                 }
             } catch (IOException e){
                 e.printStackTrace();
