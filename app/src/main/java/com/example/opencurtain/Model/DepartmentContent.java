@@ -1,9 +1,13 @@
 package com.example.opencurtain.Model;
 
 public class DepartmentContent {
-    int id = 0;
-    String department_name ="";
-    int faculty = 0;
-    int university = 0;
-    int board = 0;
+    public int id = 0;
+    public String department_name ="";
+    public int faculty = 0;
+    public int university = 0;
+    public int board = 0;
+
+    public DepartmentContent(){
+
+    }
 }

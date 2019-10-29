@@ -12,4 +12,10 @@
         <item name="android:windowBackground">@layout/activity_splash</item>
     </style>
 
+    <style name="SpinnerItemStyle" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:background">@drawable/drawable_spinner</item>
+    </style>
+
 </resources>
+
+
