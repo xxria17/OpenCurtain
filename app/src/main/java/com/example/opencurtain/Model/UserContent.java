@@ -1,13 +1,18 @@
 package com.example.opencurtain.Model;
 
-public class UserContent {
-    int id = 0;
-    String user_name = "";
-    String email = "";
-    String password = "";
-    int university = 0;
-    int faculty = 0;
-    int department = 0;
-    int authcode = 0;
+import java.io.Serializable;
 
+public class UserContent implements Serializable {
+    public int id = 0;
+    public String user_name = "";
+    public String email = "";
+    public String password = "";
+    public int university = 0;
+    public int faculty = 0;
+    public int department = 0;
+    public int authcode = 0;
+
+    public UserContent(){
+
+    }
 }

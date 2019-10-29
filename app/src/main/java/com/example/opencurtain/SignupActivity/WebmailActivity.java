@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.opencurtain.Model.UserContent;
 import com.example.opencurtain.Network.API;
 import com.example.opencurtain.Network.APIRequest;
 import com.example.opencurtain.Network.Method;
@@ -29,6 +30,8 @@ public class WebmailActivity extends AppCompatActivity implements View.OnClickLi
     private String getEmail;
 
     private APIRequest webmailRequest;
+
+    private UserContent userContent = new UserContent() ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,6 +102,8 @@ public class WebmailActivity extends AppCompatActivity implements View.OnClickLi
                                 public void onRequestOK(JSONObject jsonObject) {
                                     Intent intent = new Intent(WebmailActivity.this,AuthActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    intent.putExtra("web email",getEmail);
+                                    userContent.email = getEmail;
                                     startActivity(intent);
                                 }
                                 @Override
@@ -112,7 +117,7 @@ public class WebmailActivity extends AppCompatActivity implements View.OnClickLi
                         }
                         progressDialog.dismiss();
                     }
-                },3000);
+                },1000);
     }
 
     private boolean validate(){
