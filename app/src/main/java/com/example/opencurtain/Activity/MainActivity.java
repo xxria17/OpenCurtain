@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.example.opencurtain.Fragment.FacultyPostFragment;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
     ImageView imageView;
-
+    TextView toolbartv;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     ActionBarDrawerToggle drawerToggle;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
         imageView = findViewById(R.id.drawerMenuButton);
         drawerLayout = findViewById(R.id.drawer_menu);
         navigationView = findViewById(R.id.navigationView);
+        toolbartv = findViewById(R.id.toolbar_textview);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,18 +80,22 @@ public class MainActivity extends AppCompatActivity {
                 switch (id) {
                     case R.id.total_item:
                         transaction.replace(R.id.frameLayout, totalPostFragment).commit();
+                        toolbartv.setText("전체 글 보기");
                         break;
 
                     case R.id.univ_item:
                         transaction.replace(R.id.frameLayout, universityPostFragment).commit();
+                        toolbartv.setText("제주대학교");
                         break;
 
                     case R.id.major_item:
                         transaction.replace(R.id.frameLayout, facultyPostFragment).commit();
+                        toolbartv.setText("공과 대학");
                         break;
 
                     case R.id.sub_item:
                         transaction.replace(R.id.frameLayout, majorPostFragment).commit();
+                        toolbartv.setText("컴퓨터공학전공");
                         break;
                 }
                 return true;
@@ -107,18 +113,22 @@ public class MainActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.home: {
                         transaction.replace(R.id.frameLayout, totalPostFragment).commitAllowingStateLoss();
+                        toolbartv.setText("전체 글 보기");
                         break;
                     }
                     case R.id.search: {
                         transaction.replace(R.id.frameLayout, searchFragment).commitAllowingStateLoss();
+                        toolbartv.setText("검색");
                         break;
                     }
                     case R.id.mypage: {
                         transaction.replace(R.id.frameLayout, myPageFragment).commitAllowingStateLoss();
+                        toolbartv.setText("내 글 보기");
                         break;
                     }
                     case R.id.setting: {
                         transaction.replace(R.id.frameLayout, settingFragment).commitAllowingStateLoss();
+                        toolbartv.setText("설정");
                         break;
                     }
                 }
