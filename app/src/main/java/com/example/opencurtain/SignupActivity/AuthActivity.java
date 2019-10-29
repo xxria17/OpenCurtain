@@ -1,5 +1,6 @@
 package com.example.opencurtain.SignupActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -67,6 +68,11 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
 
         auth_btn.setEnabled(false);
 
+        final ProgressDialog progressDialog = new ProgressDialog(AuthActivity.this);
+        progressDialog.setIndeterminate(true);
+        progressDialog.setMessage("인증번호 확인중...");
+        progressDialog.show();
+
         final int number = Integer.valueOf(auth_num.getText().toString());
 
         new android.os.Handler().postDelayed(
@@ -94,7 +100,7 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
                             },auth);
                         } catch (JSONException e){
                             e.printStackTrace();
-                        }
+                        } progressDialog.dismiss();
                     }
                 },1000);
     }
