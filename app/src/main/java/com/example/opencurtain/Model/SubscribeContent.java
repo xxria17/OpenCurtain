@@ -1,9 +1,18 @@
 package com.example.opencurtain.Model;
 
 public class SubscribeContent {
-    int id = 0;
-    int user = 0 ;
-    int board = 0;
+    public int id = 0;
+
+
+
+    public int board = 0 ;
+    public String boardname = "";
+    public String title = "";
+
+    @Override
+    public String toString() {
+        return id + "/" + title;
+    }
 
     public int getId() {
         return id;
@@ -13,19 +22,14 @@ public class SubscribeContent {
         this.id = id;
     }
 
-    public int getUser() {
-        return user;
-    }
-
-    public void setUser(int user) {
-        this.user = user;
-    }
-
-    public int getBoard() {
-        return board;
-    }
-
     public void setBoard(int board) {
         this.board = board;
+    }
+    public String getBoard() {
+        return boardname;
+    }
+
+    public void setBoardname(String boardname) {
+        this.boardname = boardname;
     }
 }

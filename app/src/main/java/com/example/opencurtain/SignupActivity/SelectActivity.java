@@ -129,12 +129,10 @@ public class SelectActivity extends AppCompatActivity {
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                 Log.i("SelectActivity", String.format("select pos = %d, id = %d", position, id));
                                 UniversityContent content = universityContents.get(position);
-//                                userContent.university = content.getId();
                                 b = content.getId();
-//                                arrayList.add(content);
+
 
                                 //*단과대 선택
-//                               select_facul_Request.setUrl(API.facultys.appendString(String.valueOf(b)));
                                 try {
                                     apiRequest.execute(API.facultys.getEndPoint() + b, Method.GET, new RequestHandler() {
                                         @Override
@@ -162,8 +160,6 @@ public class SelectActivity extends AppCompatActivity {
                                                         System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + userContent.faculty);
 
                                                         //*학과 선택
-    //                                                    apiRequest.setUrl(API.departments.appendString(String.valueOf(c)));
-    //                                                    select_depart_Request.setUrl(API.departments.appendString(String.valueOf(c)));
                                                         try {
                                                             apiRequest.execute(API.departments.getEndPoint() + c, Method.GET, new RequestHandler() {
                                                                 @Override
@@ -186,7 +182,6 @@ public class SelectActivity extends AppCompatActivity {
                                                                             @Override
                                                                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                                                                                 DepartmentContent departmentContent = departmentContents.get(position);
-        //                                                                        userContent.department = departmentContent.getId();
                                                                                     a= departmentContent.getId();
                                                                             }
 
