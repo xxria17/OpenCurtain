@@ -29,6 +29,8 @@ import org.json.JSONObject;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class SelectActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -39,7 +41,9 @@ public class SelectActivity extends AppCompatActivity implements AdapterView.OnI
     private FacultyContent facultyContent;
     private Spinner univ_spin, facu_spin, depart_spin;
     private Button nextbutton;
-    String[] item;
+    ArrayList<String> item;
+    ArrayAdapter<String> universityArrayAdapter;
+    List<UniversityContent> universityContents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,22 +68,22 @@ public class SelectActivity extends AppCompatActivity implements AdapterView.OnI
         }
 
 
-        item = new String[]{"선택하세요","제주대학교","한라대학교","관광대학교","폴리텍"};
+//        item = new String[]{"선택하세요","제주대학교","한라대학교","관광대학교","폴리텍"};
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        univ_spin.setAdapter(adapter);
+        universityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        univ_spin.setAdapter(universityArrayAdapter);
 
         univ_spin.setOnItemSelectedListener(this);
 
+        getUniversity();
 
 
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(SelectActivity.this,""+ item[position], Toast.LENGTH_SHORT).show();
+//        Toast.makeText(SelectActivity.this,""+ item[position], Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -88,8 +92,6 @@ public class SelectActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     private void getUniversity(){
-
-        final ArrayList<String> list = new ArrayList<>();
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -100,8 +102,12 @@ public class SelectActivity extends AppCompatActivity implements AdapterView.OnI
                             @Override
                             public void onRequestOK(JSONObject jsonObject) {
                                 try{
-                                list.add(selectObj.getString("result"));
-
+                                item.clear();
+                                JSONArray array = jsonObject.getJSONArray("BODY_JSON");
+                                for(int i =0; i<array.length(); i++){
+                                    item.add(array.getJSONObject(i).getString("universityname"));
+                                }
+                                universityArrayAdapter.notifyDataSetChanged();
                             } catch (JSONException e){
                                     e.printStackTrace();
                                 }
@@ -112,7 +118,7 @@ public class SelectActivity extends AppCompatActivity implements AdapterView.OnI
                             public void onRequestErr(int code) {
                                 Toast.makeText(getBaseContext(), "Request Failed", Toast.LENGTH_LONG).show();
                             }
-                        },selectObj);
+                        },null);
                     }
                 },1000
         );
@@ -143,7 +149,10 @@ public class SelectActivity extends AppCompatActivity implements AdapterView.OnI
                 public void onRequestOK(JSONObject jsonObject) {
                     try {
                         JSONArray jsonArray = jsonObject.getJSONArray("data");
-                        List<UniversityContent> contentList = mapArrayList(jsonArray);
+                        universityContents = mapArrayList(jsonArray);
+                        universityArrayAdapter.clear();
+                        universityArrayAdapter.addAll(universityContents.stream().map(UniversityContent::getUniversity_name).collect(Collectors.toList()));
+                        universityArrayAdapter.notifyDataSetChanged();
                     } catch (JSONException e){
                         e.printStackTrace();
                     }
