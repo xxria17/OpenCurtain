@@ -49,6 +49,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar2">
 
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/postwrite_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="20dp"
+                android:backgroundTint="@color/white"
+                app:srcCompat="@android:drawable/ic_menu_edit" />
         </FrameLayout>
 
         <android.support.design.widget.BottomNavigationView

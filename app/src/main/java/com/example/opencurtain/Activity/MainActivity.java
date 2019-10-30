@@ -1,5 +1,6 @@
 package com.example.opencurtain.Activity;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -45,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
 
-    ImageView imageView;
+    ImageView imageView, addPost;
     TextView toolbartv;
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -61,11 +62,20 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer_menu);
         navigationView = findViewById(R.id.navigationView);
         toolbartv = findViewById(R.id.toolbar_textview);
+        addPost = findViewById(R.id.postwrite_button);
 
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.START);
+            }
+        });
+
+        addPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, AddPostActivity.class);
+                startActivity(intent);
             }
         });
 

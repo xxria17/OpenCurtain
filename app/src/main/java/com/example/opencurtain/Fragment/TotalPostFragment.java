@@ -65,7 +65,6 @@ public class TotalPostFragment extends Fragment {
 
        init(view);
 
-        //           postRequest = new APIRequest(API.posts, Method.GET);
         postRequest = APIRequest.getInstance();
 
         read_post();
@@ -162,6 +161,7 @@ public class TotalPostFragment extends Fragment {
                 privIntent.putExtra("username",postContentList.get(position).username);
                 privIntent.putExtra("timestamp",postContentList.get(position).timestamp);
                 privIntent.putExtra("id",postContentList.get(position).id);
+                privIntent.putExtra("board",postContentList.get(position).board);
                 privIntent.putExtra("content", postContentList.get(position).content);
                 startActivity(privIntent);
 

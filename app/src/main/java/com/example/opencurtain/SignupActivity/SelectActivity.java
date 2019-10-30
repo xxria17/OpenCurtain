@@ -35,7 +35,7 @@ public class SelectActivity extends AppCompatActivity {
 
 
     private static final String TAG = SelectActivity.class.getSimpleName();
-    private APIRequest select_univ_Request, select_depart_Request, select_facul_Request, joinRequest;
+
     private APIRequest apiRequest;
     private UserContent userContent;
     private UniversityContent universityContent;
@@ -96,9 +96,6 @@ public class SelectActivity extends AppCompatActivity {
     private void getUniversity(){
         universityContentRequest();
     }
-
-
-
 
     private void init(){
         univ_spin = (Spinner) findViewById(R.id.spinner);
