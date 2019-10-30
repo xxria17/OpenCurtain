@@ -1,6 +1,10 @@
 package com.example.opencurtain.Fragment;
 
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,11 +12,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Toast;
 
+import com.example.opencurtain.Activity.DetailPostActivity;
 import com.example.opencurtain.Adapter.PostAdapter;
 import com.example.opencurtain.Model.DepartmentContent;
 import com.example.opencurtain.Model.PostContent;
@@ -39,7 +47,7 @@ public class TotalPostFragment extends Fragment {
     private RecyclerView postList;
     private SwipeRefreshLayout swipeRefreshLayout;
     private PostAdapter postAdapter;
-
+    private GestureDetector gestureDetector;
     private APIRequest postRequest;
 
     ArrayAdapter<String> postArrayAdapter;
@@ -61,6 +69,7 @@ public class TotalPostFragment extends Fragment {
         postRequest = APIRequest.getInstance();
 
         read_post();
+        select_post();
 
        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
            @Override
@@ -135,6 +144,36 @@ public class TotalPostFragment extends Fragment {
         }
     }
 
+    //* 게시글 선택하기
+    private void select_post(){
+
+        gestureDetector = new GestureDetector(getActivity().getApplicationContext(), new GestureDetector.SimpleOnGestureListener(){
+            @Override
+            public boolean onSingleTapUp(MotionEvent e){
+                return true;
+            }
+        });
+
+        postList.addOnItemTouchListener(new TotalPostFragment.RecyclerTouchListener(getActivity().getApplicationContext(), postList, new TotalPostFragment.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+
+                Intent privIntent = new Intent(getActivity().getBaseContext(), DetailPostActivity.class);
+                privIntent.putExtra("username",postContentList.get(position).username);
+                privIntent.putExtra("timestamp",postContentList.get(position).timestamp);
+                privIntent.putExtra("id",postContentList.get(position).id);
+                privIntent.putExtra("content", postContentList.get(position).content);
+                startActivity(privIntent);
+
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+    }
+
     private List<PostContent> mapPostArrayList(JSONArray jsonArray) throws JSONException{
         List<PostContent> contentList = new ArrayList<>(jsonArray.length());
         for(int i = 0; i<jsonArray.length(); i++){
@@ -152,4 +191,49 @@ public class TotalPostFragment extends Fragment {
         }
         return contentList;
     }
+
+    public interface ClickListener{
+        void onClick(View view, int position);
+        void onLongClick(View view, int position);
+    }
+            public static class RecyclerTouchListener implements RecyclerView.OnItemTouchListener{
+
+                private GestureDetector gestureDetector;
+                private TotalPostFragment.ClickListener clickListener;
+
+                public RecyclerTouchListener(Context context, final RecyclerView recyclerView, final TotalPostFragment.ClickListener clickListener){
+                    this.clickListener = clickListener;
+                    gestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener(){
+                        @Override
+                        public boolean onSingleTapUp(MotionEvent e){
+                            return true;
+                        }
+
+                        @Override
+                        public void onLongPress(MotionEvent e){
+                            View child = recyclerView.findChildViewUnder(e.getX(),e.getY());
+                            if(child != null && clickListener != null){
+                                clickListener.onLongClick(child, recyclerView.getChildAdapterPosition(child));
+                            }
+                        }
+                    });
+                }
+
+                @Override
+                public boolean onInterceptTouchEvent(RecyclerView rv, MotionEvent e){
+                    View child = rv.findChildViewUnder(e.getX(), e.getY());
+                    if(child != null && clickListener != null && gestureDetector.onTouchEvent(e)){
+                        clickListener.onClick(child, rv.getChildAdapterPosition(child));
+                    }
+                    return false;
+                }
+
+                @Override
+                public void onTouchEvent(RecyclerView rv, MotionEvent e){
+                }
+
+                @Override
+                public void onRequestDisallowInterceptTouchEvent(boolean disallowIntercept){}
+            }
 }
+

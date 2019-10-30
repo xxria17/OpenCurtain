@@ -1,6 +1,8 @@
 package com.example.opencurtain.Model;
 
-public class PostContent {
+import java.io.Serializable;
+
+public class PostContent implements Serializable {
     public int id = 0;
     public int user = 0;
     public String username = "";
