@@ -97,18 +97,10 @@ public class SignInActivity extends AppCompatActivity{
                             loginRequest.execute(new RequestHandler() {
                                 @Override
                                 public void onRequestOK(JSONObject jsonObject) {
-                                    try {
-                                        if (jsonObject.getInt("result") == 200) {
-                                            Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-                                            startActivity(intent);
-                                        } else {
-                                            Toast.makeText(getBaseContext(), "Login Failed", Toast.LENGTH_LONG).show();
-                                            next_btn.setEnabled(true);
-                                        }
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
+                                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                    startActivity(intent);
+
                                 }
                                 @Override
                                 public void onRequestErr(int code) {

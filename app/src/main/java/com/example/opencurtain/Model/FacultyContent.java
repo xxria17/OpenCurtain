@@ -9,4 +9,36 @@ public class FacultyContent {
     public FacultyContent(){
 
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getFaculty_name() {
+        return faculty_name;
+    }
+
+    public void setFaculty_name(String faculty_name) {
+        this.faculty_name = faculty_name;
+    }
+
+    public int getUniversity() {
+        return university;
+    }
+
+    public void setUniversity(int university) {
+        this.university = university;
+    }
+
+    public int getBoard() {
+        return board;
+    }
+
+    public void setBoard(int board) {
+        this.board = board;
+    }
 }

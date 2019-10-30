@@ -1,7 +1,10 @@
 package com.example.opencurtain.Network;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public enum API {
-    users("/user"),
+    users("/user/"),
     subscribes("/subscribes/"),
     boards("/boards/"),
     universitys("/universitys/"),
@@ -20,5 +23,14 @@ public enum API {
     }
     public String getEndPoint() {
         return HOST + endPoint;
+    }
+
+    public URL appendString(String valueOf) {
+        try {
+            return new URL(getEndPoint() + valueOf);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

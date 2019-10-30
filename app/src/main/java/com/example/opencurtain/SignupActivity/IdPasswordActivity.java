@@ -40,6 +40,7 @@ public class IdPasswordActivity extends AppCompatActivity{
         Intent intent = getIntent();
         userContent = new UserContent();
         userContent.email = intent.getExtras().getString("email");
+        userContent.authcode = intent.getExtras().getInt("authcode");
 
         univ_email.setText(userContent.email);
 
@@ -59,72 +60,16 @@ public class IdPasswordActivity extends AppCompatActivity{
                 intent2.putExtra("username",_id);
                 intent2.putExtra("password",_password);
                 intent2.putExtra("email",userContent.email);
+                intent2.putExtra("authcode",userContent.authcode);
 
                 startActivity(intent2);
             }
         });
 
-//        try{
-//            joinRequest = new APIRequest(API.users, Method.POST);
-//        } catch (MalformedURLException e){
-//            e.printStackTrace();
-//        }
 
     }
 
 
-
-//    private void signUp(){
-//
-//        if(!validate()){
-//            next_btn.setEnabled(true);
-//            return;
-//        }
-//
-//        Intent intent = getIntent();
-//        userContent = new UserContent();
-//        userContent.email = intent.getExtras().getString("email");
-//
-//        next_btn.setEnabled(false);
-//
-//        final ProgressDialog progressDialog = new ProgressDialog(IdPasswordActivity.this);
-//        progressDialog.setIndeterminate(true);
-//        progressDialog.setMessage("가입 등록중...");
-//        progressDialog.show();
-//
-//        final String _id = id.getText().toString();
-//        final String _password = password.getText().toString();
-//
-//        new android.os.Handler().postDelayed(
-//                new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        JSONObject join = new JSONObject();
-//                        try {
-//                            join.put("username",_id);
-//                            join.put("password",_password);
-//                            join.put("email",userContent.email);
-//                            joinRequest.execute(new RequestHandler() {
-//                                @Override
-//                                public void onRequestOK(JSONObject jsonObject) {
-//                                    Intent intent1 = new Intent(IdPasswordActivity.this, SelectActivity.class);
-//                                    intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-//                                    startActivity(intent1);
-//                                }
-//
-//                                @Override
-//                                public void onRequestErr(int code) {
-//                                    Toast.makeText(getBaseContext(), "Sign Up Failed", Toast.LENGTH_LONG).show();
-//                                    next_btn.setEnabled(true);
-//                                }
-//                            },join);
-//                        } catch (JSONException e){
-//                            e.printStackTrace();
-//                        }
-//                        progressDialog.dismiss();
-//                    }
-//                } , 1000);
-//    }
 
     private void init(){
         next_btn = (Button) findViewById(R.id.next_button2);

@@ -77,8 +77,7 @@ public class APIRequest {
                     while((line = reader.readLine()) != null) {
                         builder.append(line);
                     }
-                    JSONObject obj = new JSONObject(builder.toString());
-                    result.put("BODY_JSON", obj);
+                    result.put("BODY", builder.toString());
                 }
             } catch (IOException e){
                 e.printStackTrace();

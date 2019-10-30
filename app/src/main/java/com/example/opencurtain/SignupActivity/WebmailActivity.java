@@ -109,6 +109,7 @@ public class WebmailActivity extends AppCompatActivity implements View.OnClickLi
                                 @Override
                                 public void onRequestErr(int code) {
                                     Toast.makeText(getBaseContext(), "Send web mail Failed", Toast.LENGTH_LONG).show();
+                                    Log.e("AuthActivity", String.format("HTTP Response code: %d", code));
                                     next_btn.setEnabled(true);
                                 }
                             }, webmail_auth);

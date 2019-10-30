@@ -74,6 +74,7 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
         progressDialog.show();
 
         final int number = Integer.valueOf(auth_num.getText().toString());
+        userContent.authcode = number;
 
         new android.os.Handler().postDelayed(
                 new Runnable() {
@@ -89,6 +90,7 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
                                     Intent intent = new Intent(AuthActivity.this,IdPasswordActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     intent.putExtra("email",userContent.email);
+                                    intent.putExtra("authcode",userContent.authcode);
                                     startActivity(intent);
                                 }
 
