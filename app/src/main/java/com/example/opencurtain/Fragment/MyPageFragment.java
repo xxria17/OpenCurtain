@@ -35,8 +35,9 @@ public class MyPageFragment extends Fragment {
         // Inflate the layout for this fragment
         APIRequest apiRequest = null;
         try {
-            apiRequest = new APIRequest(API.authcheck, Method.GET);
-            apiRequest.execute(new RequestHandler() {
+//            apiRequest = new APIRequest(API.authcheck, Method.GET);
+            apiRequest = APIRequest.getInstance();
+            apiRequest.execute(API.authcheck.getEndPoint(), Method.GET, new RequestHandler() {
                 @Override
                 public void onRequestOK(JSONObject jsonObject) {
                     System.out.println("잘될때");

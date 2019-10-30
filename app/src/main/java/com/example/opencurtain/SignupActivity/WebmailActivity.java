@@ -43,11 +43,8 @@ public class WebmailActivity extends AppCompatActivity implements View.OnClickLi
 
         next_btn.setOnClickListener(this);
 
-        try{
-            webmailRequest = new APIRequest(API.authcode, Method.POST);
-        } catch (MalformedURLException e){
-            e.printStackTrace();
-        }
+        //            webmailRequest = new APIRequest(API.authcode, Method.POST);
+        webmailRequest = APIRequest.getInstance();
 
     }
 
@@ -97,7 +94,7 @@ public class WebmailActivity extends AppCompatActivity implements View.OnClickLi
                         JSONObject webmail_auth = new JSONObject();
                         try{
                             webmail_auth.put("email",getEmail);
-                            webmailRequest.execute(new RequestHandler() {
+                            webmailRequest.execute(API.authcode.getEndPoint(), Method.POST, new RequestHandler() {
                                 @Override
                                 public void onRequestOK(JSONObject jsonObject) {
                                     Intent intent = new Intent(WebmailActivity.this,AuthActivity.class);
@@ -115,6 +112,8 @@ public class WebmailActivity extends AppCompatActivity implements View.OnClickLi
                             }, webmail_auth);
                         } catch (JSONException e){
                             e.printStackTrace();
+                        } catch (MalformedURLException me) {
+                            me.printStackTrace();
                         }
                         progressDialog.dismiss();
                     }

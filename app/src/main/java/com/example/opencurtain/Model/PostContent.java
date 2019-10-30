@@ -1,84 +1,81 @@
 package com.example.opencurtain.Model;
 
 public class PostContent {
-    private int ID;
+    public int id = 0;
+    public int user = 0;
+    public String username = "";
+    public String timestamp = "";
+    public int board = 0;
+    public String title = "";
+    public String content = "";
+    public String universityname = "";
 
-//    int id = 0;
-//    String user = "";
-//    int board = 0;
-//    String timestamp = "";
-//    String title = "";
-//    String content = "";
-
-    private String subscribe;
-    private String board;
-    private String university;
-    private String faculty;
-    private String department;
-    private String post;
-    private String comment;
-
-    public int getID(){
-        return ID;
+    @Override
+    public String toString() {
+        return id + "/" + title;
     }
 
-    public void setID(int ID){
-        this.ID = ID;
+    public int getId() {
+        return id;
     }
 
-    public String getSubscribe(){
-        return subscribe;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setSubscribe(String subscribe){
-        this.subscribe = subscribe;
+    public int getUser() {
+        return user;
     }
 
-    public String getBoard(){
+    public void setUser(int user) {
+        this.user = user;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public int getBoard() {
         return board;
     }
 
-    public void setBoard(String board){
+    public void setBoard(int board) {
         this.board = board;
     }
 
-    public String getUniversity(){
-        return university;
+    public String getTitle() {
+        return title;
     }
 
-    public void setUniversity(String university){
-        this.university = university;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getFaculty(){
-        return faculty;
+    public String getContent() {
+        return content;
     }
 
-    public void setFaculty(String faculty){
-        this.faculty = faculty;
+    public void setContent(String content) {
+        this.content = content;
     }
 
-    public String getDepartment(){
-        return department;
+    public String getUniversityname() {
+        return universityname;
     }
 
-    public void setDepartment(String department){
-        this.department = department;
-    }
-
-    public String getPost(){
-        return post;
-    }
-
-    public void setPost(String post){
-        this.post = post;
-    }
-
-    public String getComment(){
-        return comment;
-    }
-
-    public void setComment(String comment){
-        this.comment = comment;
+    public void setUniversityname(String universityname) {
+        this.universityname = universityname;
     }
 }

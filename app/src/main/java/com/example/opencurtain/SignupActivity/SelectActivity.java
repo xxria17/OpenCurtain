@@ -36,6 +36,7 @@ public class SelectActivity extends AppCompatActivity {
 
     private static final String TAG = SelectActivity.class.getSimpleName();
     private APIRequest select_univ_Request, select_depart_Request, select_facul_Request, joinRequest;
+    private APIRequest apiRequest;
     private UserContent userContent;
     private UniversityContent universityContent;
     private DepartmentContent departmentContent;
@@ -73,17 +74,14 @@ public class SelectActivity extends AppCompatActivity {
         arrayList = new ArrayList<>();
 
         init();
+        apiRequest = APIRequest.getInstance();
 
-        try{
-            select_univ_Request = new APIRequest(API.universitys, Method.GET);
-            select_facul_Request = new APIRequest(API.facultys, Method.GET);
-            select_depart_Request = new APIRequest(API.departments, Method.GET);
 
-            joinRequest = new APIRequest(API.users, Method.POST);
+//            select_univ_Request = new APIRequest(API.universitys, Method.GET);
+//            select_facul_Request = new APIRequest(API.facultys, Method.GET);
+//            select_depart_Request = new APIRequest(API.departments, Method.GET);
 
-        } catch (MalformedURLException e){
-            e.printStackTrace();
-        }
+//            joinRequest = new APIRequest(API.users, Method.POST);
 
         getUniversity();
 
@@ -112,7 +110,8 @@ public class SelectActivity extends AppCompatActivity {
 
     public void universityContentRequest(){
         try{
-            select_univ_Request.execute(new RequestHandler() {
+            // 대학 선택
+            apiRequest.execute(API.universitys.getEndPoint(), Method.GET, new RequestHandler() {
                 @Override
                 public void onRequestOK(JSONObject jsonObject) {
                     try {
@@ -138,95 +137,104 @@ public class SelectActivity extends AppCompatActivity {
 //                                arrayList.add(content);
 
                                 //*단과대 선택
-                               select_facul_Request.setUrl(API.facultys.appendString(String.valueOf(b)));
-                                select_facul_Request.execute(new RequestHandler() {
-                                    @Override
-                                    public void onRequestOK(JSONObject jsonObject) {
-                                        try {
-                                            JSONArray jsonArray = new JSONArray(jsonObject.getString("BODY"));
-                                            facultyContents = mapFacultyArrayList(jsonArray);
-                                            //* 출력을 위한 문자열 리스트 생성 완료
-                                            List<String> item = new ArrayList<>(facultyContents.size());
-                                            for(FacultyContent content : facultyContents){
-                                                item.add(content.faculty_name);
-                                            }
-                                            //* 스피너 등록하기
-                                            facultyArrayAdapter = new ArrayAdapter<String>(SelectActivity.this, android.R.layout.simple_spinner_item, item);
-                                            facultyArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                            facu_spin.setAdapter(facultyArrayAdapter);
-                                            //* 선택시 이벤트 핸들러 등록하기.
-                                            facu_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                @Override
-                                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                    Log.i("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", String.format("select pos = %d, id = %d", position, id));
-                                                    FacultyContent facultyContent = facultyContents.get(position);
-//                                                    userContent.faculty = facultyContent.getId();
-                                                    c = facultyContent.getId();
-                                                    System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + userContent.faculty);
+//                               select_facul_Request.setUrl(API.facultys.appendString(String.valueOf(b)));
+                                try {
+                                    apiRequest.execute(API.facultys.getEndPoint() + b, Method.GET, new RequestHandler() {
+                                        @Override
+                                        public void onRequestOK(JSONObject jsonObject) {
+                                            try {
+                                                JSONArray jsonArray = new JSONArray(jsonObject.getString("BODY"));
+                                                facultyContents = mapFacultyArrayList(jsonArray);
+                                                //* 출력을 위한 문자열 리스트 생성 완료
+                                                List<String> item = new ArrayList<>(facultyContents.size());
+                                                for(FacultyContent content : facultyContents){
+                                                    item.add(content.faculty_name);
+                                                }
+                                                //* 스피너 등록하기
+                                                facultyArrayAdapter = new ArrayAdapter<String>(SelectActivity.this, android.R.layout.simple_spinner_item, item);
+                                                facultyArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                                facu_spin.setAdapter(facultyArrayAdapter);
+                                                //* 선택시 이벤트 핸들러 등록하기.
+                                                facu_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                                    @Override
+                                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                        Log.i("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", String.format("select pos = %d, id = %d", position, id));
+                                                        FacultyContent facultyContent = facultyContents.get(position);
+    //                                                    userContent.faculty = facultyContent.getId();
+                                                        c = facultyContent.getId();
+                                                        System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@" + userContent.faculty);
 
-                                                    //*학과 선택
-                                                    select_depart_Request.setUrl(API.departments.appendString(String.valueOf(c)));
-                                                    select_depart_Request.execute(new RequestHandler() {
-                                                        @Override
-                                                        public void onRequestOK(JSONObject jsonObject) {
-                                                            try {
-                                                                JSONArray jsonArray = new JSONArray(jsonObject.getString("BODY"));
-                                                                departmentContents = mapDepartmentArrayList(jsonArray);
+                                                        //*학과 선택
+    //                                                    apiRequest.setUrl(API.departments.appendString(String.valueOf(c)));
+    //                                                    select_depart_Request.setUrl(API.departments.appendString(String.valueOf(c)));
+                                                        try {
+                                                            apiRequest.execute(API.departments.getEndPoint() + c, Method.GET, new RequestHandler() {
+                                                                @Override
+                                                                public void onRequestOK(JSONObject jsonObject) {
+                                                                    try {
+                                                                        JSONArray jsonArray = new JSONArray(jsonObject.getString("BODY"));
+                                                                        departmentContents = mapDepartmentArrayList(jsonArray);
 
-                                                                //* 출력을 위한 문자열 리스트 생성 완료
-                                                                List<String> item = new ArrayList<>(departmentContents.size());
-                                                                for(DepartmentContent content : departmentContents){
-                                                                    item.add(content.department_name);
+                                                                        //* 출력을 위한 문자열 리스트 생성 완료
+                                                                        List<String> item = new ArrayList<>(departmentContents.size());
+                                                                        for(DepartmentContent content : departmentContents){
+                                                                            item.add(content.department_name);
+                                                                        }
+                                                                        //* 스피너 등록하기
+                                                                        departmentArrayAdapter = new ArrayAdapter<String>(SelectActivity.this, android.R.layout.simple_spinner_item, item);
+                                                                        departmentArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                                                                        depart_spin.setAdapter(departmentArrayAdapter);
+                                                                        //* 선택시 이벤트 핸들러 등록하기.
+                                                                        depart_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                                                                            @Override
+                                                                            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                                                                DepartmentContent departmentContent = departmentContents.get(position);
+        //                                                                        userContent.department = departmentContent.getId();
+                                                                                    a= departmentContent.getId();
+                                                                            }
+
+                                                                            @Override
+                                                                            public void onNothingSelected(AdapterView<?> parent) {
+
+                                                                            }
+                                                                        });
+
+
+                                                                    } catch (JSONException e) {
+                                                                        e.printStackTrace();
+                                                                    }
                                                                 }
-                                                                //* 스피너 등록하기
-                                                                departmentArrayAdapter = new ArrayAdapter<String>(SelectActivity.this, android.R.layout.simple_spinner_item, item);
-                                                                departmentArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                                                                depart_spin.setAdapter(departmentArrayAdapter);
-                                                                //* 선택시 이벤트 핸들러 등록하기.
-                                                                depart_spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                                                                    @Override
-                                                                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                                                        DepartmentContent departmentContent = departmentContents.get(position);
-//                                                                        userContent.department = departmentContent.getId();
-                                                                            a= departmentContent.getId();
-                                                                    }
 
-                                                                    @Override
-                                                                    public void onNothingSelected(AdapterView<?> parent) {
+                                                                @Override
+                                                                public void onRequestErr(int code) {
 
-                                                                    }
-                                                                });
-
-
-                                                            } catch (JSONException e) {
-                                                                e.printStackTrace();
-                                                            }
+                                                                }
+                                                            });
+                                                        } catch (MalformedURLException e) {
+                                                            e.printStackTrace();
                                                         }
+                                                    }
 
-                                                        @Override
-                                                        public void onRequestErr(int code) {
+                                                    @Override
+                                                    public void onNothingSelected(AdapterView<?> parent) {
 
-                                                        }
-                                                    });
-                                                }
-
-                                                @Override
-                                                public void onNothingSelected(AdapterView<?> parent) {
-
-                                                }
-                                            });
+                                                    }
+                                                });
 
 
-                                        } catch (JSONException e) {
-                                            e.printStackTrace();
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
                                         }
-                                    }
 
-                                    @Override
-                                    public void onRequestErr(int code) {
+                                        @Override
+                                        public void onRequestErr(int code) {
 
-                                    }
-                                });
+                                        }
+                                    });
+                                } catch (MalformedURLException e) {
+                                    e.printStackTrace();
+                                }
                             }
 
                             @Override
@@ -285,7 +293,7 @@ public class SelectActivity extends AppCompatActivity {
                             join.put("authcode",userContent.authcode);
                             Log.d(TAG, "run: " + a + "/" + b + "/" + c);
                             Log.d(TAG, join.toString());
-                            joinRequest.execute(new RequestHandler() {
+                            apiRequest.execute(API.users.getEndPoint(), Method.GET, new RequestHandler() {
                                 @Override
                                 public void onRequestOK(JSONObject jsonObject) {
                                     Intent intent1 = new Intent(SelectActivity.this, SignupDoneActivity.class);
@@ -302,6 +310,8 @@ public class SelectActivity extends AppCompatActivity {
                             },join);
                         } catch (JSONException e){
                             e.printStackTrace();
+                        } catch (MalformedURLException me) {
+                            me.printStackTrace();
                         }
                         progressDialog.dismiss();
                     }

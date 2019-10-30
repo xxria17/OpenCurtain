@@ -137,24 +137,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        try{
-//            APIRequest request = new APIRequest(new URL("http","http://opencurtain.run.goorm.io",200,""),"GET");
-//            request.execute(new RequestHandler() {
-//                @Override
-//                public void onRequestOK(JSONObject jsonObject) {
-//                    Log.i("APIRequest", jsonObject.toString());
-//                }
-//
-//                @Override
-//                public void onRequestErr(int code) {
-//                    Log.e("APIRequest","error occur "+ code);
-//                }
-//            });
-//        } catch (MalformedURLException e){
-//            e.printStackTrace();
-//        }
-//
-
     }
 }
 

@@ -14,7 +14,8 @@ public enum API {
     comments("/comments/"),
     authcode("/authcode/"),
     authcheck("/authcheck/"),
-    login("/user/login/");
+    login("/user/login/"),
+    logout("/user/logout/");
 
     private final String endPoint;
     private static final String HOST = "http://opencurtain.run.goorm.io";

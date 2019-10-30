@@ -45,11 +45,8 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
         Log.d("!!!!!!!!!!!!!!!!",intent.getExtras().getString("web email"));
         userContent.email = intent.getExtras().getString("web email");
 
-        try{
-            authRequest = new APIRequest(API.authcheck, Method.POST);
-        } catch (MalformedURLException e){
-            e.printStackTrace();
-        }
+        //            authRequest = new APIRequest(API.authcheck, Method.POST);
+        authRequest = APIRequest.getInstance();
     }
 
     @Override
@@ -84,7 +81,7 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
                         try{
                             auth.put("authcode",number);
                             auth.put("email",userContent.email);
-                            authRequest.execute(new RequestHandler() {
+                            authRequest.execute(API.authcheck.getEndPoint(), Method.POST, new RequestHandler() {
                                 @Override
                                 public void onRequestOK(JSONObject jsonObject) {
                                     Intent intent = new Intent(AuthActivity.this,IdPasswordActivity.class);
@@ -102,7 +99,11 @@ public class AuthActivity extends AppCompatActivity implements View.OnClickListe
                             },auth);
                         } catch (JSONException e){
                             e.printStackTrace();
-                        } progressDialog.dismiss();
+                        } catch (MalformedURLException me) {
+                            me.printStackTrace();
+                        }
+
+                        progressDialog.dismiss();
                     }
                 },1000);
     }

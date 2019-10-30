@@ -1,6 +1,7 @@
 package com.example.opencurtain.Network;
 
 import android.os.AsyncTask;
+import android.util.Log;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -13,11 +14,28 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
+import java.util.List;
+import java.util.Map;
 
 public class APIRequest {
     private URL url;
     private String method;
     private String token;
+
+    private static class APIRequestHolder {
+        public static final APIRequest instance = new APIRequest();
+    }
+    public static APIRequest getInstance() {
+        return APIRequestHolder.instance;
+    }
+
+    private String cookieString;
+    private boolean isConnectionPersist;
+
+    public APIRequest() {
+        cookieString = "";
+        isConnectionPersist = false;
+    }
 
 //    private String uri = "http://opencurtain.run.goorm.io/";
 
@@ -27,11 +45,11 @@ public class APIRequest {
 //        this.token = null;
 //    }
 
-    public APIRequest(API api, Method method) throws MalformedURLException {
-        this.url = new URL(api.getEndPoint());
-        this.method = method.getMethod();
-        this.token = null;
-    }
+//    public APIRequest(API api, Method method) throws MalformedURLException {
+//        this.url = new URL(api.getEndPoint());
+//        this.method = method.getMethod();
+//        this.token = null;
+//    }
 
     public void setUrl(URL url){this.url= url; }
     public void setToken(String token){this.token = token;}
@@ -49,11 +67,19 @@ public class APIRequest {
             try{
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod(method);
-                connection.setRequestProperty("User-Agent","Mozilla/5.0 ( comatible) ");
-                connection.setRequestProperty("Accept","*/*");
-
+//                connection.setRequestProperty("User-Agent","Mozilla/5.0 ( comatible) ");
+//                connection.setRequestProperty("connection", "keep-alive");
+                connection.setRequestProperty("Accept","application/json");
+                connection.setUseCaches(false);
+                connection.setDefaultUseCaches(false);
                 if(token != null){
                     connection.setRequestProperty("X-App-Token",token);
+                }
+
+                Log.d("cookie status", cookieString);
+                Log.d("session status", String.valueOf(isConnectionPersist));
+                if(isConnectionPersist) {
+                    connection.setRequestProperty("Cookie", cookieString);
                 }
 
                 if(objects != null && objects[0] != null){
@@ -68,6 +94,15 @@ public class APIRequest {
                 connection.connect();
 
                 code = connection.getResponseCode();
+                Map<String, List<String>> header = connection.getHeaderFields();
+                if(header.containsKey("Set-Cookie")) {
+                    List<String> cookie = header.get("Set-Cookie");
+                    for(int i = 0; i < cookie.size(); i++) {
+                        cookieString += cookie.get(i);
+                    }
+                    isConnectionPersist = true;
+                    Log.d("cookieeeeee", cookieString);
+                }
                 if(code == HttpURLConnection.HTTP_OK){
                     result = new JSONObject();
                     result.put("HTTP_CODE", code);
@@ -116,7 +151,8 @@ public class APIRequest {
 //                connection.setRequestMethod(method);
                 connection.setRequestProperty("User-Agent","Mozilla/5.0 ( comatible) ");
                 connection.setRequestProperty("Accept","application/json");
-
+                connection.setUseCaches(false);
+                connection.setDefaultUseCaches(false);
                 if(token != null){
                     connection.setRequestProperty("X-App-Token",token);
                 }
@@ -131,6 +167,16 @@ public class APIRequest {
                 }
 
                 connection.connect();
+
+                code = connection.getResponseCode();
+                Map<String, List<String>> header = connection.getHeaderFields();
+                if(header.containsKey("Set-Cookie")) {
+                    List<String> cookie = header.get("Set-Cookie");
+                    for(int i = 0; i < cookie.size(); i++) {
+                        cookieString += cookie.get(i);
+                    }
+                    isConnectionPersist = true;
+                }
 
                 code = connection.getResponseCode();
                 if(code == HttpURLConnection.HTTP_OK){
@@ -167,11 +213,17 @@ public class APIRequest {
         }
     }
 
-    public void execute(RequestHandler handler){
-        execute(handler, null);
-    }
+//    public void execute(API api, Method method, RequestHandler handler) throws MalformedURLException {
+//        execute(api.getEndPoint(), method, handler, null);
+//    }
 
-    public void execute(RequestHandler handler, JSONObject object){
+    public void execute(String string, Method method, RequestHandler handler) throws MalformedURLException {
+        execute(string, method, handler, null);
+    }
+    public void execute(String string, Method method, RequestHandler handler, JSONObject object) throws MalformedURLException {
+        this.url = new URL(string);
+        this.method = method.getMethod();
+        this.token = null;
         AsyncRequestCall asyncRequestCall = new AsyncRequestCall(handler);
         asyncRequestCall.execute(object);
     }

@@ -43,8 +43,9 @@ public class SignInActivity extends AppCompatActivity{
         });
 
         try{
-            loginRequest = new APIRequest(API.login, Method.POST);
-            loginRequest.execute(new RequestHandler() {
+//            loginRequest = new APIRequest(API.login, Method.POST);
+            loginRequest = APIRequest.getInstance();
+            loginRequest.execute(API.login.getEndPoint(), Method.POST, new RequestHandler() {
                 @Override
                 public void onRequestOK(JSONObject jsonObject) {
                     Log.i("APIRequest", jsonObject.toString());
@@ -94,7 +95,7 @@ public class SignInActivity extends AppCompatActivity{
                         try{
                             loginInfo.put("email",id);
                             loginInfo.put("password",password);
-                            loginRequest.execute(new RequestHandler() {
+                            loginRequest.execute(API.login.getEndPoint(), Method.POST, new RequestHandler() {
                                 @Override
                                 public void onRequestOK(JSONObject jsonObject) {
                                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
@@ -109,6 +110,8 @@ public class SignInActivity extends AppCompatActivity{
                                 }
                             }, loginInfo);
                         } catch (JSONException e){
+                            e.printStackTrace();
+                        } catch (MalformedURLException e) {
                             e.printStackTrace();
                         }
                         progressDialog.dismiss();
