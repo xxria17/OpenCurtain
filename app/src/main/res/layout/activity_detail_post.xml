@@ -87,48 +87,38 @@
                     app:layout_constraintTop_toBottomOf="@+id/timestamp_tv" />
 
                 <ImageView
-                    android:id="@+id/imageView10"
-                    android:layout_width="53dp"
-                    android:layout_height="51dp"
-                    tools:layout_editor_absoluteX="16dp"
-                    tools:layout_editor_absoluteY="231dp"
-                    tools:srcCompat="@tools:sample/avatars" />
-
-                <ImageView
                     android:id="@+id/imageView11"
                     android:layout_width="23dp"
                     android:layout_height="25dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
                     android:tint="#b18d8d"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:srcCompat="@drawable/circle"
-                    tools:layout_editor_absoluteY="289dp" />
+                    app:srcCompat="@drawable/circle" />
 
                 <TextView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
                     android:layout_marginEnd="305dp"
-                    android:layout_marginRight="305dp"
                     android:text="댓글수"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toEndOf="@+id/imageView11"
-                    tools:layout_editor_absoluteY="295dp" />
+                    app:layout_constraintStart_toEndOf="@+id/imageView11" />
 
                 <View
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
                     android:layout_height="0.5dp"
                     android:layout_centerInParent="true"
+                    android:layout_marginTop="152dp"
                     android:background="#000000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/content_tv" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -153,10 +143,11 @@
         android:id="@+id/edit_comment"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
         android:hint="댓글을 입력하세요"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
@@ -169,5 +160,14 @@
         app:layout_constraintStart_toStartOf="@+id/toolbar4"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/backbutton" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="전송"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView4" />
 
 </android.support.constraint.ConstraintLayout>

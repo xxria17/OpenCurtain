@@ -63,6 +63,7 @@ public class SettingFragment extends Fragment {
                                 Toast.makeText(getContext(),"로그아웃 되었습니다",Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent(getActivity(), IntroductionActivity.class);
                                 startActivity(intent);
+                                getActivity().finish();
                             }
 
                             @Override
@@ -81,5 +82,6 @@ public class SettingFragment extends Fragment {
 
         return view;
     }
+
 
 }
