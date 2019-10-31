@@ -104,6 +104,7 @@ public class BoardFragment extends Fragment {
                             postContent.username = content.username;
                             postContent.content = content.content;
                             postContent.title = content.title;
+                            postContent.boardname = content.boardname;
 
                             list.add(postContent);
 
@@ -164,6 +165,7 @@ public class BoardFragment extends Fragment {
             content.setTimestamp(jsonObject.getString("timestamp"));
             content.setUser(jsonObject.getInt("user"));
             content.setUsername(jsonObject.getString("username"));
+            content.setBoardname(jsonObject.getString("boardname"));
             contentList.add(content);
         }
         return contentList;

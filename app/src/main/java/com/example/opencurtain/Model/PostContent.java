@@ -11,6 +11,24 @@ public class PostContent implements Serializable {
     public String title = "";
     public String content = "";
     public String universityname = "";
+    public String boardname = "";
+    public int commentcount = 0;
+
+    public int getCommentcount() {
+        return commentcount;
+    }
+
+    public void setCommentcount(int commentcount) {
+        this.commentcount = commentcount;
+    }
+
+    public String getBoardname() {
+        return boardname;
+    }
+
+    public void setBoardname(String boardname) {
+        this.boardname = boardname;
+    }
 
     @Override
     public String toString() {

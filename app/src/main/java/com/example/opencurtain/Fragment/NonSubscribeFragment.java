@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,8 +64,6 @@ public class NonSubscribeFragment extends Fragment {
 
         init(view);
         getUniversityList();
-        getFaculty();
-        getDepartment();
         return view;
     }
 
@@ -94,11 +93,13 @@ public class NonSubscribeFragment extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    getFaculty();
                 }
 
                 @Override
                 public void onRequestErr(int code) {
                     System.out.println("Error ;;;; " + code);
+                    getFaculty();
                 }
             });
         } catch (MalformedURLException e) {
@@ -132,11 +133,13 @@ public class NonSubscribeFragment extends Fragment {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+                    getDepartment();
                 }
 
                 @Override
                 public void onRequestErr(int code) {
                     System.out.println("Error ;;;; " + code);
+                    getDepartment();
                 }
             });
         } catch (MalformedURLException e) {
@@ -205,6 +208,7 @@ public class NonSubscribeFragment extends Fragment {
         List<FacultyContent> contentList = new ArrayList<>(jsonArray.length());
         for(int i = 0; i<jsonArray.length(); i++){
             JSONObject jsonObject = jsonArray.getJSONObject(i);
+            Log.d("A!!!!!", jsonObject.toString());
             FacultyContent content = new FacultyContent();
             content.setId(jsonObject.getInt("id"));
             content.setFaculty_name(jsonObject.getString("facultyname"));

@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activity.AddPostActivity">
+    tools:context=".Activity.AddPostActivity"
+    android:background="@color/white">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar3"
@@ -59,7 +60,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                android:backgroundTint="@color/white"
+                android:backgroundTint="@color/colorPrimary"
+                android:gravity="center"
                 android:hint="제목"
                 android:inputType="textMultiLine" />
 
@@ -70,6 +72,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:gravity="start|top"
+                android:layout_marginTop="10dp"
                 android:backgroundTint="@color/white"
                 android:hint="내용을 입력해주세요"
                 android:inputType="textMultiLine" />
@@ -86,7 +89,7 @@
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="@+id/toolbar3"
         app:layout_constraintTop_toTopOf="@+id/toolbar3"
-        app:srcCompat="@drawable/uploadbutton" />
+        app:srcCompat="@drawable/ic_send_24px" />
 
     <ImageView
         android:id="@+id/return_button"

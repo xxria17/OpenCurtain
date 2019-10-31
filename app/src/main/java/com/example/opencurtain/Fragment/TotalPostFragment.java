@@ -110,6 +110,8 @@ public class TotalPostFragment extends Fragment {
                             postContent.username = content.username;
                             postContent.content = content.content;
                             postContent.title = content.title;
+                            postContent.boardname = content.boardname;
+                            postContent.commentcount = content.commentcount;
 
     //                        postContent.id = content.getId();
     //                        postContent.title = content.getTitle();
@@ -155,6 +157,7 @@ public class TotalPostFragment extends Fragment {
                 privIntent.putExtra("id",postContentList.get(position).id);
                 privIntent.putExtra("board",postContentList.get(position).board);
                 privIntent.putExtra("content", postContentList.get(position).content);
+                privIntent.putExtra("commentcount",postContentList.get(position).commentcount);
                 startActivity(privIntent);
 
             }
@@ -179,6 +182,8 @@ public class TotalPostFragment extends Fragment {
             content.setTimestamp(jsonObject.getString("timestamp"));
             content.setUser(jsonObject.getInt("user"));
             content.setUsername(jsonObject.getString("username"));
+            content.setBoardname(jsonObject.getString("boardname"));
+            content.setCommentcount(jsonObject.getInt("commentcount"));
             contentList.add(content);
         }
         return contentList;

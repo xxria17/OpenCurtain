@@ -38,7 +38,7 @@
             app:layout_constraintBottom_toTopOf="@+id/frameLayout"
             app:layout_constraintStart_toStartOf="@+id/toolbar2"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/drawermenu" />
+            app:srcCompat="@drawable/ic_menu_24px" />
 
         <FrameLayout
             android:id="@+id/frameLayout"
@@ -57,7 +57,9 @@
                 android:layout_gravity="bottom|right"
                 android:layout_margin="20dp"
                 android:backgroundTint="@color/white"
-                app:srcCompat="@android:drawable/ic_menu_edit" />
+                android:tint="@color/black"
+                app:borderWidth="0dp"
+                app:srcCompat="@drawable/ic_create_24px" />
         </FrameLayout>
 
         <android.support.design.widget.BottomNavigationView
@@ -81,7 +83,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:text="전체 글 보기"
+            android:text="전체"
             android:textSize="25dp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/frameLayout"
@@ -95,7 +97,7 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/sidemenu_list"
-        android:layout_width="240dp"
+        android:layout_width="250dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="@color/white"
