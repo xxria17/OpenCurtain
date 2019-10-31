@@ -47,7 +47,6 @@ public class TotalPostFragment extends Fragment {
     private RecyclerView postList;
     private SwipeRefreshLayout swipeRefreshLayout;
     private PostAdapter postAdapter;
-    private GestureDetector gestureDetector;
     private APIRequest postRequest;
 
     ArrayAdapter<String> postArrayAdapter;
@@ -145,13 +144,6 @@ public class TotalPostFragment extends Fragment {
 
     //* 게시글 선택하기
     private void select_post(){
-
-        gestureDetector = new GestureDetector(getActivity().getApplicationContext(), new GestureDetector.SimpleOnGestureListener(){
-            @Override
-            public boolean onSingleTapUp(MotionEvent e){
-                return true;
-            }
-        });
 
         postList.addOnItemTouchListener(new TotalPostFragment.RecyclerTouchListener(getActivity().getApplicationContext(), postList, new TotalPostFragment.ClickListener() {
             @Override

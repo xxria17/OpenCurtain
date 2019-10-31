@@ -84,10 +84,6 @@ public class MainActivity extends AppCompatActivity {
                 FragmentTransaction transaction = fragmentManager.beginTransaction();
                 drawerLayout.closeDrawers();
 
-//                Intent intent = new Intent(MainActivity.this, BoardFragment.class);
-//                intent.putExtra("id",subscribeContentList.get(position).id);
-//                startActivity(intent);
-
                 Bundle bundle = new Bundle(1);
 
                 int id = subscribeContentList.get(position).board;

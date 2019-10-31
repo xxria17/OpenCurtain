@@ -2,6 +2,8 @@ package com.example.opencurtain.Activity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -101,6 +103,14 @@ public class SignInActivity extends AppCompatActivity{
                                     Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
+
+                                    Handler handler = new Handler();
+                                    Message message = handler.obtainMessage();
+                                    Bundle bundle = new Bundle(2);
+                                    bundle.putString("id",id);
+                                    bundle.putString("password",password);
+                                    message.setData(bundle);
+                                    handler.sendMessage(message);
 
                                 }
                                 @Override
