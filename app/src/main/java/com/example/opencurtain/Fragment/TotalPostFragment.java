@@ -158,6 +158,7 @@ public class TotalPostFragment extends Fragment {
                 privIntent.putExtra("board",postContentList.get(position).board);
                 privIntent.putExtra("content", postContentList.get(position).content);
                 privIntent.putExtra("commentcount",postContentList.get(position).commentcount);
+                privIntent.putExtra("title",postContentList.get(position).title);
                 startActivity(privIntent);
 
             }

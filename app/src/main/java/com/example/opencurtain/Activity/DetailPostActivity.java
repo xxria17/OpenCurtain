@@ -15,7 +15,7 @@ import com.example.opencurtain.R;
 
 public class DetailPostActivity extends AppCompatActivity {
 
-    private TextView username, timestamp, content, comment_Count;
+    private TextView username, timestamp, content, comment_Count, title;
     private EditText comment;
     private Button sendbutton;
     private ImageView backbutton;
@@ -31,18 +31,20 @@ public class DetailPostActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        String contentSt, timeSt, usernameSt;
+        String contentSt, timeSt, usernameSt, titleSt;
         int commentCount;
 
         contentSt = intent.getStringExtra("content");
         timeSt = intent.getStringExtra("timestamp");
         usernameSt = intent.getStringExtra("username");
         commentCount = intent.getIntExtra("commentcount", 0);
+        titleSt = intent.getStringExtra("title");
 
 //        contentSt = postContent.content;
 //        timeSt = postContent.timestamp;
 //        usernameSt = postContent.username;
 
+        title.setText(titleSt);
         username.setText(usernameSt);
         timestamp.setText(timeSt);
         content.setText(contentSt);
@@ -63,6 +65,7 @@ public class DetailPostActivity extends AppCompatActivity {
         timestamp = (TextView) findViewById(R.id.timestamp_tv);
         content = (TextView) findViewById(R.id.content_tv);
         comment_Count = (TextView) findViewById(R.id.commentcount);
+        title = (TextView) findViewById(R.id.title_textView);
 
         comment = (EditText) findViewById(R.id.edit_comment);
         backbutton = (ImageView) findViewById(R.id.backbutton);

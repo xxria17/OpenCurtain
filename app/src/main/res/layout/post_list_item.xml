@@ -71,19 +71,31 @@
                 card_view:layout_constraintHorizontal_bias="0.0"
                 card_view:layout_constraintStart_toEndOf="@+id/imageView2"
                 card_view:layout_constraintTop_toBottomOf="@+id/username" />
+
         </android.support.constraint.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/title_postList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginRight="8dp"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:text="제목제목" />
 
         <TextView
             android:id="@+id/post_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:text="금융권 준비하시는 분 계신가요? 이번에 졸업해서 준비를 하려는데 여러모로 걱정이 많네요 ㅠㅠ ncs 준비는 어떻게 하시는지, 그 외 다른 부분은 어떤거 준…"
-            android:maxLines="1"
-            android:ellipsize="end"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="22dp"/>
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="22dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="금융권 준비하시는 분 계신가요? 이번에 졸업해서 준비를 하려는데 여러모로 걱정이 많네요 ㅠㅠ ncs 준비는 어떻게 하시는지, 그 외 다른 부분은 어떤거 준…" />
 
         <TableRow
             android:layout_width="match_parent"

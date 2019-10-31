@@ -79,15 +79,13 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="8dp"
                     android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
                     android:text="공기업준비 다들 전공공부 하시나요?? 제주대학교에서 지역인재 활용하면 거의다 ncs만 시험보던데 주변에서 자꾸 전공공부하라고해서 전공공부해서 가는곳은 진짜 전국권에서 박터지는곳 밖에없는데 전공공부를 꼭해야합니까!? 그리고 전공공부하면 cpa 경제학으로 공부하려고 하는데 이걸로 어느 공기업 갈수있을까요?"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/timestamp_tv" />
+                    app:layout_constraintTop_toBottomOf="@+id/title_textView" />
 
                 <ImageView
                     android:id="@+id/imageView11"
@@ -140,6 +138,21 @@
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+                <TextView
+                    android:id="@+id/title_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="제목제목제목"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.041"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/timestamp_tv" />
 
             </android.support.constraint.ConstraintLayout>
 

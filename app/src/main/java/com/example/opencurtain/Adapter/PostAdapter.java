@@ -18,7 +18,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
-        public TextView univTextView, usernameTextView, timeStampTextView, contentTextView, comment_count;
+        public TextView univTextView, usernameTextView, timeStampTextView, contentTextView, comment_count, titleTextview;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             univTextView = itemView.findViewById(R.id.university);
@@ -26,6 +26,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             timeStampTextView = itemView.findViewById(R.id.timestamp);
             contentTextView = itemView.findViewById(R.id.post_content);
             comment_count = itemView.findViewById(R.id.comment_count);
+            titleTextview = itemView.findViewById(R.id.title_postList);
         }
     }
 
@@ -53,6 +54,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
         viewHolder.timeStampTextView.setText(postContentList.get(i).timestamp);
         viewHolder.usernameTextView.setText(postContentList.get(i).username);
         viewHolder.comment_count.setText(String.valueOf(postContentList.get(i).commentcount));
+        viewHolder.titleTextview.setText(postContentList.get(i).title);
     }
 
     @Override

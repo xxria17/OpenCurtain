@@ -104,18 +104,19 @@ public class SignInActivity extends AppCompatActivity{
                                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
 
-                                    Handler handler = new Handler();
-                                    Message message = handler.obtainMessage();
-                                    Bundle bundle = new Bundle(2);
-                                    bundle.putString("id",id);
-                                    bundle.putString("password",password);
-                                    message.setData(bundle);
-                                    handler.sendMessage(message);
+//                                    Handler handler = new Handler();
+//                                    Message message = handler.obtainMessage();
+//                                    Bundle bundle = new Bundle(2);
+//                                    bundle.putString("id",id);
+//                                    bundle.putString("password",password);
+//                                    message.setData(bundle);
+//                                    handler.sendMessage(message);
 
                                 }
                                 @Override
                                 public void onRequestErr(int code) {
                                     Toast.makeText(getBaseContext(), "Login Failed", Toast.LENGTH_LONG).show();
+                                    Log.d("!@#!@#!@#!@#!@#!@#!@#!@#!@#!@#","Error : "+code);
                                     next_btn.setEnabled(true);
                                 }
                             }, loginInfo);
