@@ -76,13 +76,6 @@ public class SelectActivity extends AppCompatActivity {
         init();
         apiRequest = APIRequest.getInstance();
 
-
-//            select_univ_Request = new APIRequest(API.universitys, Method.GET);
-//            select_facul_Request = new APIRequest(API.facultys, Method.GET);
-//            select_depart_Request = new APIRequest(API.departments, Method.GET);
-
-//            joinRequest = new APIRequest(API.users, Method.POST);
-
         getUniversity();
 
         nextbutton.setOnClickListener(new View.OnClickListener() {

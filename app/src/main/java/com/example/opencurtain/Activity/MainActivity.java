@@ -14,26 +14,18 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toolbar;
 
 import com.example.opencurtain.Adapter.SidemenuAdapter;
 import com.example.opencurtain.Fragment.BoardFragment;
-import com.example.opencurtain.Fragment.FacultyPostFragment;
-import com.example.opencurtain.Fragment.MajorPostFragment;
 import com.example.opencurtain.Fragment.MyPageFragment;
 import com.example.opencurtain.Fragment.SearchFragment;
 import com.example.opencurtain.Fragment.SettingFragment;
 import com.example.opencurtain.Fragment.TotalPostFragment;
-import com.example.opencurtain.Fragment.UniversityPostFragment;
 import com.example.opencurtain.Model.SubscribeContent;
 import com.example.opencurtain.Network.API;
 import com.example.opencurtain.Network.APIRequest;
@@ -47,7 +39,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
