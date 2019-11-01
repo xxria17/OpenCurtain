@@ -141,6 +141,7 @@ public class BoardFragment extends Fragment {
                 privIntent.putExtra("id",postContentList.get(position).id);
                 privIntent.putExtra("board",postContentList.get(position).board);
                 privIntent.putExtra("content", postContentList.get(position).content);
+                privIntent.putExtra("title",postContentList.get(position).title);
                 startActivity(privIntent);
 
             }
